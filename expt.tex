@@ -1,0 +1,62 @@
+\documentclass{article}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\begin{document}
+
+\begin{figure}[h!]
+  \begin{center}
+    \begin{circuitikz}
+      \draw (0,0)
+      to[V,v=$U_q$] (0,2) % The voltage source
+      to[short] (2,2)
+      to[R=$R_1$] (2,0) % The resistor
+      to[short] (0,0);
+      \draw (2,2)
+      to[short] (4,2)
+      to[L=$L_1$] (4,0)
+      to[short] (2,0);
+      \draw (4,2)
+      to[short] (6,2)
+      to[C=$C_1$] (6,0)
+      to[short] (4,0);
+   \end{circuitikz}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{circuitikz}
+  \draw (0,0) node[npn](npn1) {}
+  (npn1.base) node[anchor=east] {B}
+  (npn1.collector) node[anchor=south,xshift=0.5cm] {C}
+  (npn1.emitter) node[anchor=north] {E};
+  \draw (npn1.collector) to[R] ++(0,2);
+\end{circuitikz}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{circuitikz}
+  \draw (0,0) node[pnp](pnp1) {}
+  (npn1.base) node[] {a}
+  (npn1.collector) node[] {b}
+  (npn1.emitter) node[] {c};
+  \draw (npn1.collector) to[R=$R_c$] ++(0,2)
+  to[short] (4,2.77);
+  \draw (npn1.emitter) to[short] (0,-2)
+  to[short] (4,-2)
+  to[V,v=$V_EC$] (4,2.77);
+  \draw (npn1.base) to[short] (-3,0)
+  to[short] (-3,-0.5);
+  signal
+  \draw (-3,-1.5) to[short] (-3,-2)
+  to[V,v=$V_BC$] (0,-2);
+  \draw (npn1.emitter) to[short] (1.5,-0.77);
+  
+  \draw (1.5,-0.77) node(anchor=west){//};
+  
+\end{circuitikz}
+\end{figure}
+
+
+\end{document}
